@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="home">
+    <v-row justify="center">
+      <v-col cols="10">
+        <h1>Lista de juegos</h1>
+      </v-col>
+    </v-row>
+    <div lg="2" xl="2" md="2" cols="12">
+      <Card />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Card from "../components/Card.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Card,
+  },
+
+  mounted() {
+    this.cargaTabla();
+  },
+  methods: {
+    cargaTabla() {
+      console.log("se llama metodo cargarTabla");
+      this.$store.dispatch("cargarJuegos");
+    },
+  },
+};
 </script>
