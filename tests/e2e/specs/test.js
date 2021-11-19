@@ -1,7 +1,7 @@
 // For authoring Nightwatch tests, see
 // https://nightwatchjs.org/guide
 
-const rutaAdministracion = 'http://localhost:8080/administracion';
+
 
 module.exports = {
     'testing home component title': browser => {
@@ -31,9 +31,19 @@ module.exports = {
             .saveScreenshot('./reports/filledFields.png')
             .click('#submitOpinion')
             .saveScreenshot('./reports/submitForm.png')
-            .url(process.env.this.rutaAdministracion)
+            .url('http://localhost:8080/administracion')
             .click('#botonEditar')
             .saveScreenshot('./reports/availabilityOpinion.png')
             .end()
     },
+    /*
+        'testing opinion availability in administracion component': browser => {
+            browser
+                .init()
+                .url('http://localhost:8080/administracion')
+                .click('#botonEditar')
+                .saveScreenshot('./reports/availabilityOpinion.png')
+                .end()
+        },
+    */
 }

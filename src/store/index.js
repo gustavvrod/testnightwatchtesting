@@ -4,10 +4,13 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
+var opiniones = window.localStorage.getItem("opiniones") ?
+    JSON.parse(window.localStorage.getItem("opiniones")) : [];
+
 export default new Vuex.Store({
     state: {
         juegos: [],
-        opiniones: [],
+        opiniones: opiniones,
         loading: false,
         opinion: {
             juego: '',
@@ -26,12 +29,15 @@ export default new Vuex.Store({
         },
         AGREGAROPINION(state, laOpinion) {
             state.opiniones.push(laOpinion);
+            window.localStorage.setItem("opinions", JSON.stringify(state.opiniones));
         },
         AGREGARFORMNOMBRE(state, unNombre) {
             state.opinion.nombre = unNombre;
+            window.localStorage.setItem("names", JSON.stringify(state.nombre));
         },
         ELIMINAROPINION(state, id) {
             state.opiniones.splice(id, 1);
+            window.localStorage.setItem("opinions", JSON.stringify(state.opiniones));
             alert('Elemento eliminado exitosamente');
         },
         EDITAROPINION(state, cargaUtil) {
@@ -64,6 +70,9 @@ export default new Vuex.Store({
             console.log('editarOpinion')
             console.log('carga util: ', cargaUtil);
             context.commit('EDITAROPINION', cargaUtil);
+        },
+        getOpiniones(context, opiniones) {
+            return context.state.opiniones;
         }
     },
     modules: {},

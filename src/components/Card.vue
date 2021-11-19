@@ -102,6 +102,7 @@
   </v-container>
 </template>
 
+
 <script>
 import { mapState } from "vuex";
 export default {
@@ -111,26 +112,15 @@ export default {
       nombreJuegoTemporal: "",
       mensajeModal: "",
       formLocal: {
-        juego: "unjuego",
-        nombre: "unnombre",
-        opinion: "unaopinion",
+        juego: "",
+        nombre: "",
+        opinion: "",
       },
       dialog: false,
     };
   },
   computed: {
     ...mapState(["juegos", "opinion", "loading"]),
-  },
-  mounted() {
-    if (localStorage.juego) {
-      this.formLocal.juego = localStorage.juego;
-    }
-    if (localStorage.nombre) {
-      this.formLocal.nombre = localStorage.nombre;
-    }
-    if (localStorage.opinion) {
-      this.formLocal.opinion = localStorage.opinion;
-    }
   },
   methods: {
     showModal(nombreJuego) {
@@ -154,19 +144,19 @@ export default {
       let miOpinion = this.formLocal;
       console.log(JSON.stringify(miOpinion));
 
-      let elNombreJuego = localStorage.juego;
+      let elNombreJuego = this.formLocal.juego;
       console.log(elNombreJuego);
 
-      let elNombreAutor = localStorage.nombre;
+      let elNombreAutor = this.formLocal.nombre;
       console.log(elNombreAutor);
 
-      let laOpinion = localStorage.opinion;
+      let laOpinion = this.formLocal.opinion;
       console.log(laOpinion);
 
       let enviarOpinion = {
-        juego: localStorage.juego,
-        nombre: localStorage.nombre,
-        opinion: localStorage.opinion,
+        juego: elNombreJuego,
+        nombre: elNombreAutor,
+        opinion: laOpinion,
       };
       this.$store.dispatch("agregarOpinion", enviarOpinion);
       console.log("se envian datos de la opinion");
